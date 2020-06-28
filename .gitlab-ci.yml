@@ -13,15 +13,14 @@ before_script:
   - pip install -U virtualenv
   - virtualenv venv
   - source venv/bin/activate
-  - pip install -U twine
-  - pip install -U pytest
+  - pip install -U flit
   - pip install -U mypy
   - pip install -U yaqc
   - pip install -U yaqd-core
-  - pip install -e .
+  - pip install -U yaq-traits
+  - FLIT_ROOT_INSTALL=1 flit install
 
 # test stage
-
 mypy:
   stage: test
   script:
@@ -31,13 +30,16 @@ entry:
   script:
     - yaqd-acton-2150i --version
     - yaqd-acton-2150i -h
+traits:
+  stage: test
+  script:
+    - yaq-traits check yaqd_acton/acton-2150i.avpr
 
 # deploy stage
-twine:
+flit:
   stage: deploy
   script:
-    - python setup.py sdist bdist_wheel
-    - twine upload dist/*
+    - flit publish
   artifacts:
     paths:
       - dist/*
