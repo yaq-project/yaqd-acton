@@ -1,0 +1,15 @@
+protocol = "acton-2150i"
+doc = "Acton 2150i dual grating imaging monochromator."
+traits = ["uses-uart", "has-turret", "has-limits", "is-daemon"]
+version = "0"
+
+[links]
+documentation = "https://yaq.fyi/daemons/acton-2150i"
+source = "https://gitlab.com/yaq/yaqd-acton"
+bugtracker = "https://gitlab.com/yaq/yaqd-acton/-/issues"
+
+[installation]
+PyPI = "https://pypi.org/project/yaqd-acton/"
+
+[config.baud_rate]
+default = 9600
