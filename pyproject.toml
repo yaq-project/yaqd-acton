@@ -4,6 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [tool.flit.metadata]
 module = "yaqd_acton"
+dist-name = "yaqd-acton"
 author = "Blaise Thompson"
 author-email = "blaise@untzag.com"
 home-page = "https://gitlab.com/yaq/yaqd-acton"
