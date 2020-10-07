@@ -1,7 +1,7 @@
 protocol = "acton-2150i"
 doc = "Acton 2150i dual grating imaging monochromator."
 traits = ["uses-uart", "has-turret", "has-limits", "is-daemon"]
-version = "0"
+hardware = ["acton:2150i"]
 
 [links]
 documentation = "https://yaq.fyi/daemons/acton-2150i"
