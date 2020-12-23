@@ -10,6 +10,7 @@ bugtracker = "https://gitlab.com/yaq/yaqd-acton/-/issues"
 
 [installation]
 PyPI = "https://pypi.org/project/yaqd-acton/"
+conda-forge = "https://anaconda.org/conda-forge/yaqd-acton"
 
 [config.baud_rate]
 default = 9600

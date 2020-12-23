@@ -67,7 +67,8 @@
         "acton:2150i"
     ],
     "installation": {
-        "PyPI": "https://pypi.org/project/yaqd-acton/"
+        "PyPI": "https://pypi.org/project/yaqd-acton/",
+        "conda-forge": "https://anaconda.org/conda-forge/yaqd-acton"
     },
     "links": {
         "bugtracker": "https://gitlab.com/yaq/yaqd-acton/-/issues",
@@ -248,12 +249,12 @@
         }
     },
     "traits": [
-        "is-daemon",
         "has-turret",
+        "has-position",
+        "is-daemon",
         "uses-uart",
-        "uses-serial",
         "has-limits",
-        "has-position"
+        "uses-serial"
     ],
     "types": [
         {
