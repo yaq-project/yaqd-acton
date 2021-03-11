@@ -317,12 +317,12 @@
         }
     },
     "traits": [
-        "is-daemon",
-        "uses-uart",
-        "has-turret",
-        "uses-serial",
         "has-limits",
-        "has-position"
+        "has-position",
+        "has-turret",
+        "is-daemon",
+        "uses-serial",
+        "uses-uart"
     ],
     "types": [
         {
