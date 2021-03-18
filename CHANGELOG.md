@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Changed
+- Updated to string based turret identifiers (still just numeric, but encoded as a string rather than an int)
+
 ## [2020.12.0]
 
 ## Changed
