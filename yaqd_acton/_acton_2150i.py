@@ -33,10 +33,14 @@ class Acton2150I(ContinuousHardware):
         self._busy = True
         self.ser.write(f"{position} GOTO\r".encode())
 
-    def set_turret(self, index):
+    def set_turret(self, identifier):
         self._busy = True
-        self.ser.write(f"{index} GRATING\r".encode())
-        self._state["turret"] = index
+        self.ser.write(f"{int(identifier)%2+1} GRATING\r".encode())
+        self.ser.write(f"{int(identifier)//2+1} TURRET\r".encode())
+        self._state["turret"] = identifier
+
+    def get_turret_options(self):
+        return [str(i) for i in range(1,7)]
 
     def get_turret(self):
         return self._state["turret"]
