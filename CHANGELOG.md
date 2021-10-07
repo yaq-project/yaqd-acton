@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+##[2021.10.0]
+
+### Changed
+- regenerated avpr based on recent traits update
+
+
 ## [2021.3.0]
 
 ### Changed
@@ -12,7 +18,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [2020.12.0]
 
-## Changed
+### Changed
 - regenerated avpr based on recent traits update
 
 ## [2020.07.0]
@@ -25,7 +31,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 ### Added
 - initial release
 
-[Unreleased]: https://gitlab.com/yaq/yaqd-acton/-/compare/v2021.3.0...master
+[Unreleased]: https://gitlab.com/yaq/yaqd-acton/-/compare/v2021.10.0...master
+[2021.10.0]: https://gitlab.com/yaq/yaqd-acton/-/compare/v2021.3.0...v2021.10.0
 [2021.3.0]: https://gitlab.com/yaq/yaqd-acton/-/compare/v2020.12.0...v2021.3.0
 [2020.12.0]: https://gitlab.com/yaq/yaqd-acton/-/compare/v2020.07.0...v2020.12.0
 [2020.07.0]: https://gitlab.com/yaq/yaqd-acton/-/compare/v2020.06.0...v2020.07.0
