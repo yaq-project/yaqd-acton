@@ -1,0 +1,145 @@
+protocol = "acton-sp2300i"
+doc = "Acton SP-2300i line of imaging spectromators."
+traits = ["uses-uart", "uses-serial", "has-turret", "has-limits", "has-position", "is-daemon"]
+hardware = ["acton:sp2300i"]
+
+[links]
+documentation = "https://yaq.fyi/daemons/acton-sp2300i"
+source = "https://gitlab.com/yaq/yaqd-acton"
+bugtracker = "https://gitlab.com/yaq/yaqd-acton/-/issues"
+
+[installation]
+PyPI = "https://pypi.org/project/yaqd-acton/"
+conda-forge = "https://anaconda.org/conda-forge/yaqd-acton"
+
+[[types]]
+type = "enum"
+name = "valid_models"
+symbols = ["SP-2355", "SP-2356", "SP-2357", "SP-2358", "SP-2360"]
+
+[[types]]
+name = "diverter"
+type = "enum"
+symbols = ["SIDE", "FRONT", "None"]
+
+[config]
+
+[config.baud_rate]
+type = "int"
+default = 9600
+
+
+[state]
+
+[state.gratings]
+doc = "List of gratings as registered in spectrometer non-volatile memory."
+type = {"type"="array", "items"="string"}
+default = [""]
+
+[state.mirrors]
+doc = "diverting position of switchable entrance and exit mirrors"
+type = {"type"="array", "items"="diverter"}
+default = ["SIDE"]
+
+[state.slits]
+doc = "slit widths for all entrance and exit ports.  If slit is not motorized, null-valued"
+type = "array"
+items = ["string", "int"]
+default = [""]
+
+
+[messages]
+
+[messages.get_slit_units]
+response = "string"
+
+[messages.get_slit_limits]
+response = [{"type"="array", "items"="int"}]
+
+[messages.get_front_entrance_slit]
+response = ["int", "string"]
+
+[messages.set_front_entrance_slit]
+request = [{"name"="width", "type"="int"}]
+
+[messages.get_side_entrance_slit]
+response = ["int", "string"]
+
+[messages.set_side_entrance_slit]
+request = [{"name"="width", "type"="int"}]
+
+[messages.get_front_exit_slit]
+response = ["int", "string"]
+
+[messages.set_front_exit_slit]
+request = [{"name"="width", "type"="int"}]
+
+[messages.get_side_exit_slit]
+response = ["int", "string"]
+
+[messages.set_side_exit_slit]
+request = [{"name"="width", "type"="int"}]
+
+[messages.get_entrance_mirror]
+response = ["null", "diverter"]
+
+[messages.set_entrance_mirror]
+request = [{"name"="facing", "type"="diverter"}]
+
+[messages.get_exit_mirror]
+response = ["null", "diverter"]
+
+[messages.set_exit_mirror]
+request = [{"name"="facing", "type"="diverter"}]
+
+[properties]
+
+[properties.front_entrance_slit]
+getter = "get_front_entrance_slit"
+setter = "set_front_entrance_slit"
+units_getter = "get_slit_units"
+limits_getter = "get_slit_limits"
+control_kind = "normal"
+record_kind = "metadata"
+type = "double"
+
+[properties.side_entrance_slit]
+getter = "get_side_entrance_slit"
+setter = "set_side_entrance_slit"
+units_getter = "get_slit_units"
+limits_getter = "get_slit_limits"
+control_kind = "normal"
+record_kind = "metadata"
+type = "double"
+
+# [properties.front_exit_slit]
+# getter = "get_front_exit_slit"
+# setter = "set_front_exit_slit"
+# units_getter = "get_slit_units"
+# limits_getter = "get_slit_limits"
+# control_kind = "normal"
+# record_kind = "metadata"
+# type = "double"
+
+# [properties.side_exit_slit]
+# getter = "get_side_exit_slit"
+# setter = "set_side_exit_slit"
+# units_getter = "get_slit_units"
+# limits_getter = "get_slit_limits"
+# control_kind = "normal"
+# record_kind = "metadata"
+# type = "double"
+
+[properties.entrance_mirror]
+getter = "get_entrance_mirror"
+setter = "set_entrance_mirror"
+control_kind = "normal"
+record_kind = "metadata"
+type = "diverter"
+
+[properties.exit_mirror]
+getter = "get_exit_mirror"
+setter = "set_exit_mirror"
+control_kind = "normal"
+record_kind = "metadata"
+type = "diverter"

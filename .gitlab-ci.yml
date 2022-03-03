@@ -30,10 +30,13 @@ entry:
   script:
     - yaqd-acton-2150i --version
     - yaqd-acton-2150i -h
+    - yaqd-acton-sp2300i --version
+    - yaqd-acton-sp2300i -h
 traits:
   stage: test
   script:
     - yaq-traits check yaqd_acton/acton-2150i.avpr
+    - yaq-traits check yaqd_acton/acton-sp2300i.avpr
 
 # deploy stage
 flit:
