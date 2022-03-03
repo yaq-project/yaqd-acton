@@ -27,6 +27,7 @@ dev = ["black", "pre-commit"]
 
 [tool.flit.scripts]
 yaqd-acton-2150i = "yaqd_acton._acton_2150i:Acton2150I.main"
+yaqd-acton-sp2300i = "yaqd_acton._acton_sp2300i:ActonSP2300i.main"
 
 [tool.black]
 line-length = 99
