@@ -22,11 +22,7 @@ eol = b"ok\r\n"
 class ActonMono(UsesUart, HasTurret, HasLimits):
     def __init__(self, name, config, config_filepath):
         super().__init__(name, config, config_filepath)
-        self.ser = aserial.ASerial(
-            config["serial_port"],
-            baudrate=config["baud_rate"],
-            eol=eol
-        )
+        self.ser = aserial.ASerial(config["serial_port"], baudrate=config["baud_rate"], eol=eol)
         self.ser.timeout = 1
         # TODO: grab gratings per turret (mono-eestatus)
         # --- find active grating
@@ -116,7 +112,7 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
 
     async def update_state(self):
         while True:
-            busy:bool = False
+            busy: bool = False
             try:
                 if abs(self._state["position"] - self._state["destination"]) > 0.1:
                     busy = True
@@ -129,12 +125,12 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
                 if self._state["slits"] != self._slit_destinations:
                     busy = True
                     for i in self._slit_ids:
-                        facing = ["FRONT", "SIDE"][i//2]
-                        end = ["ENT", "EXIT"][i%2]
+                        facing = ["FRONT", "SIDE"][i // 2]
+                        end = ["ENT", "EXIT"][i % 2]
                         if f"{facing}-{end}-SLIT\r".encode() not in self._queue:
                             self._queue += [
                                 f"{facing}-{end}-SLIT\r".encode(),
-                                f"?MICRONS\r".encode()
+                                f"?MICRONS\r".encode(),
                             ]
                 if self._state["mirrors"] != self._mirror_destinations:
                     busy = True
@@ -155,7 +151,7 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
                 self.logger.debug("busy")
                 await asyncio.sleep(1)
 
-    def direct_serial_write(self, message:bytes) -> None:
+    def direct_serial_write(self, message: bytes) -> None:
         self.ser.timeout = 1
         self.ser.write(message)
         out = self.ser.read_until(eol)
@@ -172,7 +168,7 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
         self._state["destination"] = position
         self._queue += [f"{position} GOTO\r".encode()]
 
-    def set_turret(self, id:str) -> None:
+    def set_turret(self, id: str) -> None:
         i = self._state["gratings"].index(id)
         self._grating_destination = id
         self._set_hw_limits(id)
@@ -188,25 +184,17 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
     def get_turret_options(self):
         return [i for i in self._state["gratings"]]
 
-    def set_front_entrance_slit(self, width:int):
-        self._loop.create_task(
-            self._aset_slit_width("ENT", "FRONT", width)
-        )
+    def set_front_entrance_slit(self, width: int):
+        self._loop.create_task(self._aset_slit_width("ENT", "FRONT", width))
 
-    def set_side_entrance_slit(self, width:int) -> None:
-        self._loop.create_task(
-            self._aset_slit_width("ENT", "SIDE", width)
-        )
+    def set_side_entrance_slit(self, width: int) -> None:
+        self._loop.create_task(self._aset_slit_width("ENT", "SIDE", width))
 
-    def set_front_exit_slit(self, width:int) -> None:
-        self._loop.create_task(
-            self._aset_slit_width("EXIT", "FRONT", width)
-        )
+    def set_front_exit_slit(self, width: int) -> None:
+        self._loop.create_task(self._aset_slit_width("EXIT", "FRONT", width))
 
-    def set_side_exit_slit(self, width:int) -> None:
-        self._loop.create_task(
-            self._aset_slit_width("EXIT", "SIDE", width)
-        )
+    def set_side_exit_slit(self, width: int) -> None:
+        self._loop.create_task(self._aset_slit_width("EXIT", "SIDE", width))
 
     def get_front_entrance_slit(self) -> int:
         return self._state["slits"][0]
@@ -229,7 +217,7 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
     def get_entrance_mirror(self) -> str:
         return self._state["mirrors"][0]
 
-    def set_entrance_mirror(self, facing:str) -> None:
+    def set_entrance_mirror(self, facing: str) -> None:
         if self._mirror_moves[0]:
             self._loop.create_task(self._aset_mirror("ENT", facing))
         else:
@@ -238,17 +226,17 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
     def get_exit_mirror(self) -> str:
         return self._state["mirrors"][1]
 
-    def set_exit_mirror(self, facing:str) -> None:
+    def set_exit_mirror(self, facing: str) -> None:
         if self._mirror_moves[1]:
             self._loop.create_task(self._aset_mirror("EXIT", facing))
         else:
             self.logger.error(f"exit mirror is not motorized")
 
-    async def _aset_mirror(self, end:str, facing:str):
+    async def _aset_mirror(self, end: str, facing: str):
         i = ["ENT", "EXIT"].index(end)
         self._queue += [f"{end}-MIRROR\r".encode(), f"{facing}\r".encode()]
 
-    async def _aset_slit_width(self, end:str, facing:str, position:float):
+    async def _aset_slit_width(self, end: str, facing: str, position: float):
         i = self.slit_names.index(f"{facing}-{end}")
         self._slit_destinations[i] = 5 * round(position / 5)  # sets to nearest 5 um
         self._busy = True
@@ -266,7 +254,7 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
                 self._parse_line(line.decode())
             await asyncio.sleep(0.1)
 
-    def _parse_line(self, line:str):
+    def _parse_line(self, line: str):
         """
         parses serial response and applies info to state
         """
@@ -280,7 +268,7 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
             if "?GRATING" == cmd:
                 grating = split[1]
                 self.logger.debug("?GRATING" + grating)
-                self._state["grating"] = self._state["gratings"][int(grating)-1]
+                self._state["grating"] = self._state["gratings"][int(grating) - 1]
             elif "?nm" == cmd.lower():
                 position = split[1]
                 self.logger.debug("?nm" + position)
@@ -314,7 +302,7 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
                     self._active_mirror = 0 if select_mirror["facing"] == "ENT" else 1
                 elif mirror_facing:
                     self._mirror_destinations[self._active_mirror] = mirror_facing["side"]
-                    self._busy = True                    
+                    self._busy = True
                 else:
                     self.logger.error(f"could not parse: {line}")
         except Exception as e:
@@ -330,5 +318,3 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
             gpmm = int(gpmm["gpmm"])
             limit = 11200 * 150 / max(150, gpmm)
         self._state["hw_limits"] = [-limit, limit]
-
-

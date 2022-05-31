@@ -12,4 +12,3 @@ from .__version__ import __branch__
 
 class ActonSP2300i(ActonMono):
     _kind = "acton-sp2300i"
-
