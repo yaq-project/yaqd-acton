@@ -7,12 +7,12 @@ import re
 
 import serial  # type: ignore
 
-from yaqd_core import ContinuousHardware, aserial
+from yaqd_core import HasTurret, UsesUart, UsesSerial, HasLimits, HasPosition, IsDaemon, aserial
 
 from .__version__ import __branch__
 
 
-class Acton2150I(ContinuousHardware):
+class Acton2150I(HasTurret, UsesUart, UsesSerial, HasLimits, HasPosition, IsDaemon):
     _kind = "acton-2150i"
 
     def __init__(self, name, config, config_filepath):

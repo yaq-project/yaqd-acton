@@ -5,11 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
-##[2021.10.0]
+### Fixed
+- 2150i was broken by traits update last year, just now noticed
+
+## [2021.10.0]
 
 ### Changed
 - regenerated avpr based on recent traits update
-
 
 ## [2021.3.0]
 
