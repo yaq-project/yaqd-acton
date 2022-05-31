@@ -314,7 +314,7 @@ class ActonMono(UsesUart, HasTurret, HasLimits):
                     self._active_mirror = 0 if select_mirror["facing"] == "ENT" else 1
                 elif mirror_facing:
                     self._mirror_destinations[self._active_mirror] = mirror_facing["side"]
-                    self._busy = True                    
+                    self._busy = True
                 else:
                     self.logger.error(f"could not parse: {line}")
         except Exception as e:

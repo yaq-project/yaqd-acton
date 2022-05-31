@@ -16,9 +16,9 @@ This package contains the following daemon(s):
 
 ## acton-sp2300i notes
 * This daemon has been tested and designed on a SP-2358 unit. There is a motorized slit on the front side entrance, and the exit mirror is movable. It's primary turret has a mirror and two gratings. The daemon was written with the intent of being usable on all sp23xx systems, but it has not been tested. Feedback and/or bugfixes are appreciated!
-* _This daemon is designed for the RS232 port._ sp2300i models can be controlled via their onboard USB or RS232 port, but the USB port has different response behavior (consult the manual) which has not currently been addressed. 
+* _This daemon is designed for the RS232 port._ sp2300i models can be controlled via their onboard USB or RS232 port, but the USB port has different response behavior (consult the manual) which has not currently been addressed.
 * The identifiers of the gratings occupying each turret are retrieved from the spectrometer memory (`?GRATINGS`).  If gratings are changed, be sure to register changes by changing the on board grating info (see the manual for full instructions).
-* The daemon moves to set wavelengths at max speed (i.e. `GOTO` command).  It does not currently support constant speed scanning (i.e. `NM` and `>NM` commands).  
+* The daemon moves to set wavelengths at max speed (i.e. `GOTO` command).  It does not currently support constant speed scanning (i.e. `NM` and `>NM` commands).
 
 ## maintainers
 
