@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [2022.5.0]
+
 ### Fixed
 - 2150i was broken by traits update last year, just now noticed
 
