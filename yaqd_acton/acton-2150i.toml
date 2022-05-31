@@ -1,6 +1,6 @@
 protocol = "acton-2150i"
 doc = "Acton 2150i dual grating imaging monochromator."
-traits = ["uses-uart", "has-turret", "has-limits", "is-daemon"]
+traits = ["uses-uart", "has-turret", "has-limits", "has-position", "is-daemon"]
 hardware = ["acton:2150i"]
 
 [links]
