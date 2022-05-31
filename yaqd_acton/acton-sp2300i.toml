@@ -5,8 +5,8 @@ hardware = ["acton:sp2300i"]
 
 [links]
 documentation = "https://yaq.fyi/daemons/acton-sp2300i"
-source = "https://gitlab.com/yaq/yaqd-acton"
-bugtracker = "https://gitlab.com/yaq/yaqd-acton/-/issues"
+source = "https://github.com/yaq-project/yaqd-acton"
+bugtracker = "https://github.com/yaq-project/yaqd-acton/-/issues"
 
 [installation]
 PyPI = "https://pypi.org/project/yaqd-acton/"
