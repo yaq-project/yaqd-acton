@@ -102,9 +102,9 @@
         "conda-forge": "https://anaconda.org/conda-forge/yaqd-acton"
     },
     "links": {
-        "bugtracker": "https://gitlab.com/yaq/yaqd-acton/-/issues",
+        "bugtracker": "https://github.com/yaq-project/yaqd-acton/-/issues",
         "documentation": "https://yaq.fyi/daemons/acton-sp2300i",
-        "source": "https://gitlab.com/yaq/yaqd-acton"
+        "source": "https://github.com/yaq-project/yaqd-acton"
     },
     "messages": {
         "busy": {
@@ -373,13 +373,13 @@
     },
     "properties": {
         "destination": {
-            "control_kind": "normal",
+            "control_kind": "hinted",
             "dynamic": true,
             "getter": "get_destination",
             "limits_getter": null,
             "options_getter": null,
             "record_kind": "data",
-            "setter": null,
+            "setter": "set_position",
             "type": "double",
             "units_getter": "get_units"
         },
@@ -423,7 +423,7 @@
             "limits_getter": "get_limits",
             "options_getter": null,
             "record_kind": "data",
-            "setter": "set_position",
+            "setter": null,
             "type": "double",
             "units_getter": "get_units"
         },
