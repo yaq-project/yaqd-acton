@@ -31,7 +31,7 @@ class Acton2150I(HasTurret, UsesUart, UsesSerial, HasLimits, HasPosition, IsDaem
 
     def _set_position(self, position):
         self._busy = True
-        self.ser.write(f"{position} GOTO\r".encode())
+        self.ser.write(f"{round(position, 1)} GOTO\r".encode())
 
     def set_turret(self, identifier):
         self._busy = True
@@ -57,7 +57,10 @@ class Acton2150I(HasTurret, UsesUart, UsesSerial, HasLimits, HasPosition, IsDaem
                 await asyncio.sleep(1)
                 continue
             # assess busy state
-            if math.isclose(now, self._state["position"]):
+            if abs(now - self._state["destination"]) > 0.2:
+                self._busy = True
+                self._state["position"] = now
+            elif math.isclose(now, self._state["position"]):
                 self._busy = False
                 await self._busy_sig.wait()
             else:
