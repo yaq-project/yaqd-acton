@@ -1,0 +1,4 @@
+[spectrometer]
+port = 38000
+serial_port = "COM6"
+model = "SP-2358"
