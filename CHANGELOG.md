@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Fixed
+- round position on write
+- prevent case where busy would always be false
+
 ## [2022.5.0]
 
 ### Fixed
