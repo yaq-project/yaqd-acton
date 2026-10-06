@@ -9,7 +9,6 @@ from yaqd_core import UsesUart, HasTurret, HasLimits, aserial
 
 from .__version__ import __branch__
 
-
 gpmm_re = re.compile(r"\d+(?=\s*g/mm)")
 nm_re = re.compile(r"[\d\.\d]+(?=\s*[nN][mM])")
 slit_re = re.compile(r"(?P<facing>(FRONT)|(SIDE))-(?P<end>(ENT)|(EXIT))-SLIT")
